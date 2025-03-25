@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Minecraft Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="skillbar.css">
+    <link rel="stylesheet" href="carousel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <style>
+      h2{color: rgb(0, 174, 255);}
+    </style>
+</head>
+<body>
+    <nav class="sticky-nav">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
+      <img src="img/enderpearl.png" alt="Back to Top">
+  </button>
+
+    <section id="hero" class="hero">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <img src="img/Rosh-Andriele-Bautista.png" class="carousel-item active">
+                <img src="img/Section.png" class="carousel-item">
+                <img src="img/your_text.png" class="carousel-item">
+            </div>
+           
+        </div>
+        <a href="resume.pdf" class="download-btn" download>Download Resume</a>
+    </section>
+    
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>I'm Rosh Andriele,a BSIT Student from Cavite State University-Silang Campus</p>
+    </section>
+    
+    <section id="skills" class="skills">
+        <h2>Skills</h2>
+        <div class="skill-bar">
+          <p>Arduino<span class="hearts" data-level="8"></span></p>
+          <p>HTML<span class="hearts" data-level="5"></span></p>
+          <p>Java <span class="hearts" data-level="7"></span></p>
+          <p>Flutter <span class="hearts" data-level="3"></span></p>
+      </div>
+    </section>
+    <section id="gallery" class="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery-container">
+          <img src="img/q1.jpg" class="gallery-item" onclick="openModal(this.src)">
+          <img src="img/q2.jpg" class="gallery-item" onclick="openModal(this.src)">
+          <img src="img/q3.jpg" class="gallery-item" onclick="openModal(this.src)">
+          <img src="img/q4.jpg" class="gallery-item" onclick="openModal(this.src)">
+          <img src="img/q5.jpg" class="gallery-item" onclick="openModal(this.src)">
+      </div>
+    </section>
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <!-- Project cards go here -->
+    </section>
+    
+   
+        <div id="modal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img  class="modal-content" id="modal-img">
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <div class="contact-icons">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </section>
+    <footer class="footer">
+      <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+      <p>You've Reached Bedrock</p>
+    </footer>
+    
+    <script>
+
+window.onscroll = function() {
+    let button = document.getElementById("backToTop");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+    }
+};
+
+// Smooth scroll to top function
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+      let slideIndex = 0;
+      const slides = document.querySelectorAll(".carousel-item");
+      function moveSlide(n) {
+          slides[slideIndex].classList.remove("active");
+          slideIndex = (slideIndex + n + slides.length) % slides.length;
+          slides[slideIndex].classList.add("active");
+      }
+      function autoSlide() {
+          moveSlide(1);
+          setTimeout(autoSlide, 3000);
+      }
+      setTimeout(autoSlide, 3000);
+
+      function openModal(src) {
+          document.getElementById("modal").style.display = "block";
+          document.getElementById("modal-img").src = src;
+      }
+      function closeModal() {
+          document.getElementById("modal").style.display = "none";
+      }
+  </script>
+
+<script>
+  let CarouselslideIndex = 0;
+const Carouselslides = document.querySelectorAll(".carousel-item");
+
+function showSlides() {
+  Carouselslides.forEach((slide, index) => {
+    Carouselslides.classList.remove("active");
+    });
+
+    Carouselslides[CarouselslideIndex].classList.add("active");
+    CarouselslideIndex= (CarouselslideIndex+ 1) % Carouselslides.length;
+    setTimeout(showSlides, 3000); // Changes every 3 seconds
+}
+
+// Start the carousel
+showSlides();
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".hearts").forEach(span => {
+          let level = parseInt(span.getAttribute("data-level"));
+          for (let i = 0; i < 10; i++) {
+              let heart = document.createElement("span");
+              heart.classList.add("heart", i < level ? "filled" : "empty");
+              span.appendChild(heart);
+          }
+      });
+  });
+  </script>
+</body>
+</html>
